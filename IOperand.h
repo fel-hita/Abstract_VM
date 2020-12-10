@@ -7,7 +7,6 @@
 
         class IOperand {
             public:
-                IOperand const * createOperand( eOperandType type, std::string const & value ) const;
                 virtual int getPrecision( void ) const = 0; // Precision of the type of the instance
                 virtual eOperandType getType( void ) const = 0; // Type of the instance
                 virtual IOperand const * operator+( IOperand const & rhs ) const = 0; // Sum
@@ -91,8 +90,13 @@
                 std::string const & toString( void ) const = 0; // String representation of the instance
                 // ~IOperand( void ) {}
         };
+        
+        class IOperand_Factory {
+            public:
+                IOperand const * createOperand( eOperandType type, std::string const & value ) const;
+        };
 
-        IOperand const * IOperand::createOperand(eOperandType type, std::string const & value) const {
+        IOperand const * IOperand_Factory::createOperand(eOperandType type, std::string const & value) const {
             void (*funcptr[])() = {};
         }
 #endif
