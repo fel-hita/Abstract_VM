@@ -104,16 +104,16 @@
                 return new IOperand_Int8(value);
             };
             IOperand const * createInt16( std::string const & value ) const {
-                return new IOperand_Int16;
+                return new IOperand_Int16(value);
             };
             IOperand const * createInt32( std::string const & value ) const {
-                return new IOperand_Int32;
+                return new IOperand_Int32(value);
             };
             IOperand const * createFloat( std::string const & value ) const {
-                return new IOperand_Float;
+                return new IOperand_Float(value);
             };
             IOperand const * createDouble( std::string const & value ) const {
-                return new IOperand_Double;
+                return new IOperand_Double(value);
             };
             public:
                 IOperand const * createOperand( eOperandType type, std::string const & value ) const;
