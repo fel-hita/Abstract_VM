@@ -125,9 +125,9 @@
         };
 
         IOperand const * IOperand_Factory::createOperand(eOperandType type, std::string const & value) const {
-            typedef IOperand const * (IOperand_Factory::*funcPtr) ( std::string const & value);
-            funcPtr funcArr[] = { createInt8 };
             // IOperand const * (IOperand_Factory::*funcArr[])( std::string const & ) const = { createInt8, createInt16, createInt32, createFloat, createDouble };
-            // (*funcArr[type](value));
+            typedef IOperand const * (IOperand_Factory::*funcPtr) ( std::string const & value) const;
+            funcPtr funcArr[] = { createInt8, createInt16, createInt32, createFloat, createDouble };
+            return (this->*funcArr[type])(value); // ->* // .* specifically to access function members with function pointers
         }
 #endif
