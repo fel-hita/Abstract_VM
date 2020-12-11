@@ -20,13 +20,18 @@
 
         class IOperand_Int8 : public IOperand {
             private:
+                int precision = 0;
                 int8_t op_val;
             public:
                 IOperand_Int8( std::string const & value) {
                     op_val = stoi(value);
                 };
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
+                int getPrecision( void ) const {
+                    return precision;
+                };
+                eOperandType getType( void ) const {
+                    return Int8;
+                };
                 IOperand const * operator+( IOperand const & rhs ) const;
                 IOperand const * operator-( IOperand const & rhs ) const;
                 IOperand const * operator*( IOperand const & rhs ) const;
@@ -37,13 +42,18 @@
 
         class IOperand_Int16 : public IOperand {
             private:
+                int precision = 1;
                 int16_t op_val;
             public:
                 IOperand_Int16( std::string const & value) {
                     op_val = stoi(value);
                 };
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
+                int getPrecision( void ) const {
+                    return precision;
+                };
+                eOperandType getType( void ) const {
+                    return Int16;
+                };
                 IOperand const * operator+( IOperand const & rhs ) const;
                 IOperand const * operator-( IOperand const & rhs ) const;
                 IOperand const * operator*( IOperand const & rhs ) const;
@@ -54,13 +64,18 @@
 
         class IOperand_Int32 : public IOperand {
             private:
+                int precision = 2;
                 int32_t op_val;
             public:
                 IOperand_Int32( std::string const & value) {
                     op_val = stoi(value);
                 };
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
+                int getPrecision( void ) const {
+                    return precision;
+                };
+                eOperandType getType( void ) const {
+                    return Int32;
+                };
                 IOperand const * operator+( IOperand const & rhs ) const;
                 IOperand const * operator-( IOperand const & rhs ) const;
                 IOperand const * operator*( IOperand const & rhs ) const;
@@ -71,13 +86,18 @@
 
         class IOperand_Float : public IOperand {
             private:
+                int precision = 3;
                 float op_val;
             public:
                 IOperand_Float( std::string const & value) {
                     op_val = stof(value);
                 };
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
+                int getPrecision( void ) const {
+                    return precision;
+                };
+                eOperandType getType( void ) const {
+                    return Float;
+                };
                 IOperand const * operator+( IOperand const & rhs ) const;
                 IOperand const * operator-( IOperand const & rhs ) const;
                 IOperand const * operator*( IOperand const & rhs ) const;
@@ -88,13 +108,18 @@
 
         class IOperand_Double : public IOperand {
             private:
+                int precision = 4;
                 double op_val;
             public:
                 IOperand_Double( std::string const & value) {
                     op_val = stod(value);
                 };
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
+                int getPrecision( void ) const {
+                    return precision;
+                };
+                eOperandType getType( void ) const {
+                    return Double;
+                };
                 IOperand const * operator+( IOperand const & rhs ) const;
                 IOperand const * operator-( IOperand const & rhs ) const;
                 IOperand const * operator*( IOperand const & rhs ) const;
