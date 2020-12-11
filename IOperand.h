@@ -7,7 +7,7 @@
 
         class IOperand {
             public:
-                virtual int getPrecision( void ) const; // Precision of the type of the instance
+                virtual int getPrecision( void ) const; // 0 of the type of the instance
                 virtual eOperandType getType( void ) const; // Type of the instance
                 virtual IOperand const * operator+( IOperand const & rhs ) const; // Sum
                 virtual IOperand const * operator-( IOperand const & rhs ) const; // Difference
@@ -20,14 +20,16 @@
 
         class IOperand_Int8 : public IOperand {
             private:
-                int precision = 0;
                 int8_t op_val;
             public:
                 IOperand_Int8( std::string const & value) {
                     op_val = stoi(value);
                 };
                 int getPrecision( void ) const {
-                    return precision;
+                    int8_t x = abs(x);  
+                    return (x < 10 ? 1 :   
+                        (x < 100 ? 2 :   
+                        3));  
                 };
                 eOperandType getType( void ) const {
                     return Int8;
@@ -42,14 +44,18 @@
 
         class IOperand_Int16 : public IOperand {
             private:
-                int precision = 1;
                 int16_t op_val;
             public:
                 IOperand_Int16( std::string const & value) {
                     op_val = stoi(value);
                 };
                 int getPrecision( void ) const {
-                    return precision;
+                    int16_t x = abs(x);  
+                    return (x < 10 ? 1 :   
+                        (x < 100 ? 2 :   
+                        (x < 1000 ? 3 :   
+                        (x < 10000 ? 4 :   
+                        5))));  
                 };
                 eOperandType getType( void ) const {
                     return Int16;
@@ -64,14 +70,23 @@
 
         class IOperand_Int32 : public IOperand {
             private:
-                int precision = 2;
                 int32_t op_val;
             public:
                 IOperand_Int32( std::string const & value) {
                     op_val = stoi(value);
                 };
                 int getPrecision( void ) const {
-                    return precision;
+                    int32_t x = abs(x);  
+                    return (x < 10 ? 1 :   
+                        (x < 100 ? 2 :   
+                        (x < 1000 ? 3 :   
+                        (x < 10000 ? 4 :   
+                        (x < 100000 ? 5 :   
+                        (x < 1000000 ? 6 :   
+                        (x < 10000000 ? 7 :  
+                        (x < 100000000 ? 8 :  
+                        (x < 1000000000 ? 9 :  
+                        10)))))))));  
                 };
                 eOperandType getType( void ) const {
                     return Int32;
@@ -86,14 +101,13 @@
 
         class IOperand_Float : public IOperand {
             private:
-                int precision = 3;
                 float op_val;
             public:
                 IOperand_Float( std::string const & value) {
                     op_val = stof(value);
                 };
                 int getPrecision( void ) const {
-                    return precision;
+                    return 0;
                 };
                 eOperandType getType( void ) const {
                     return Float;
@@ -108,14 +122,13 @@
 
         class IOperand_Double : public IOperand {
             private:
-                int precision = 4;
                 double op_val;
             public:
                 IOperand_Double( std::string const & value) {
                     op_val = stod(value);
                 };
                 int getPrecision( void ) const {
-                    return precision;
+                    return 0;
                 };
                 eOperandType getType( void ) const {
                     return Double;
