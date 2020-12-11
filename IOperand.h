@@ -2,7 +2,6 @@
     #define operand_h
         #include <string>
         #include <iostream>
-        using funcPtr =  IOperand const * (IOperand_Factory::*)( std::string const & );
 
         enum eOperandType {Int8, Int16, Int32, Float, Double};
 
@@ -20,7 +19,8 @@
         };
 
         class IOperand_Int8 : public IOperand {
-            int8_t op_val;
+            private:
+                int8_t op_val;
             public:
                 IOperand_Int8( std::string const & value) {
                     op_val = stoi(value);
@@ -36,7 +36,8 @@
         };
 
         class IOperand_Int16 : public IOperand {
-            int16_t op_val;
+            private:
+                int16_t op_val;
             public:
                 IOperand_Int16( std::string const & value) {
                     op_val = stoi(value);
@@ -52,7 +53,8 @@
         };
 
         class IOperand_Int32 : public IOperand {
-            int32_t op_val;
+            private:
+                int32_t op_val;
             public:
                 IOperand_Int32( std::string const & value) {
                     op_val = stoi(value);
@@ -68,7 +70,8 @@
         };
 
         class IOperand_Float : public IOperand {
-            float op_val;
+            private:
+                float op_val;
             public:
                 IOperand_Float( std::string const & value) {
                     op_val = stof(value);
@@ -84,7 +87,8 @@
         };
 
         class IOperand_Double : public IOperand {
-            double op_val;
+            private:
+                double op_val;
             public:
                 IOperand_Double( std::string const & value) {
                     op_val = stod(value);
@@ -100,26 +104,30 @@
         };
         
         class IOperand_Factory {
-            IOperand const * createInt8( std::string const & value) const {
-                return new IOperand_Int8(value);
-            };
-            IOperand const * createInt16( std::string const & value ) const {
-                return new IOperand_Int16(value);
-            };
-            IOperand const * createInt32( std::string const & value ) const {
-                return new IOperand_Int32(value);
-            };
-            IOperand const * createFloat( std::string const & value ) const {
-                return new IOperand_Float(value);
-            };
-            IOperand const * createDouble( std::string const & value ) const {
-                return new IOperand_Double(value);
-            };
+            private:
+                IOperand const * createInt8( std::string const & value) const {
+                    return new IOperand_Int8(value);
+                };
+                IOperand const * createInt16( std::string const & value ) const {
+                    return new IOperand_Int16(value);
+                };
+                IOperand const * createInt32( std::string const & value ) const {
+                    return new IOperand_Int32(value);
+                };
+                IOperand const * createFloat( std::string const & value ) const {
+                    return new IOperand_Float(value);
+                };
+                IOperand const * createDouble( std::string const & value ) const {
+                    return new IOperand_Double(value);
+                };
             public:
                 IOperand const * createOperand( eOperandType type, std::string const & value ) const;
         };
 
         IOperand const * IOperand_Factory::createOperand(eOperandType type, std::string const & value) const {
-            IOperand const * (IOperand_Factory::*funcptr[])( std::string const &) const = { createInt8, createInt16, createInt32, createFloat, createDouble };
+            typedef IOperand const * (IOperand_Factory::*funcPtr) ( std::string const & value);
+            funcPtr funcArr[] = { createInt8 };
+            // IOperand const * (IOperand_Factory::*funcArr[])( std::string const & ) const = { createInt8, createInt16, createInt32, createFloat, createDouble };
+            // (*funcArr[type](value));
         }
 #endif
