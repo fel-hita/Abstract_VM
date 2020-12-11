@@ -2,6 +2,7 @@
     #define operand_h
         #include <string>
         #include <iostream>
+        using funcPtr =  IOperand const * (IOperand_Factory::*)( std::string const & );
 
         enum eOperandType {Int8, Int16, Int32, Float, Double};
 
@@ -19,9 +20,9 @@
         };
 
         class IOperand_Int8 : public IOperand {
-            IOperand const * createInt8( std::string const & value ) const {
-                return ;
-            };
+            // IOperand const * createInt8( std::string const & value ) const {
+            //     return ;
+            // };
             public:
                 int getPrecision( void ) const = 0; // Precision of the type of the instance
                 eOperandType getType() {
@@ -36,7 +37,7 @@
         };
 
         class IOperand_Int16 : public IOperand {
-            IOperand const * createInt16( std::string const & value ) const;
+            // IOperand const * createInt16( std::string const & value ) const;
             public:
                 int getPrecision( void ) const = 0; // Precision of the type of the instance
                 eOperandType getType( void ) const = 0; // Type of the instance
@@ -50,7 +51,7 @@
         };
 
         class IOperand_Int32 : public IOperand {
-            IOperand const * createInt32( std::string const & value ) const;
+            // IOperand const * createInt32( std::string const & value ) const;
             public:
                 int getPrecision( void ) const = 0; // Precision of the type of the instance
                 eOperandType getType( void ) const = 0; // Type of the instance
@@ -64,7 +65,7 @@
         };
 
         class IOperand_Float : public IOperand {
-            IOperand const * createFloat( std::string const & value ) const;
+            // IOperand const * createFloat( std::string const & value ) const;
             public:
                 int getPrecision( void ) const = 0; // Precision of the type of the instance
                 eOperandType getType( void ) const = 0; // Type of the instance
@@ -78,7 +79,7 @@
         };
 
         class IOperand_Double : public IOperand {
-            IOperand const * createDouble( std::string const & value ) const;
+            // IOperand const * createDouble( std::string const & value ) const;
             public:
                 int getPrecision( void ) const = 0; // Precision of the type of the instance
                 eOperandType getType( void ) const = 0; // Type of the instance
@@ -92,11 +93,16 @@
         };
         
         class IOperand_Factory {
+            IOperand const * createInt8( std::string const & value) const;
+            IOperand const * createInt16( std::string const & value ) const;
+            IOperand const * createInt32( std::string const & value ) const;
+            IOperand const * createFloat( std::string const & value ) const;
+            IOperand const * createDouble( std::string const & value ) const;
             public:
                 IOperand const * createOperand( eOperandType type, std::string const & value ) const;
         };
 
         IOperand const * IOperand_Factory::createOperand(eOperandType type, std::string const & value) const {
-            void (*funcptr[])() = {};
+            IOperand const * (IOperand_Factory::*funcptr[])( std::string const &) const = { createInt8, createInt16, createInt32, createFloat, createDouble };
         }
 #endif
