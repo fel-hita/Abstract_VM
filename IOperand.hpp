@@ -1,99 +1,25 @@
-#ifndef ioperand_h
-    #define operand_h
-        #include <string>
-        #include <iostream>
+#ifndef IOPERAND_HPP
+# define IOPERAND_HPP
 
-        enum eOperandType {Int8, Int16, Int32, Float, Double};
+# include <string>
+# include "eOperandType.hpp"
 
-        class IOperand {
-            public:
-                virtual int getPrecision( void ) const; // 0 of the type of the instance
-                virtual eOperandType getType( void ) const; // Type of the instance
-                virtual IOperand const * operator+( IOperand const & rhs ) const; // Sum
-                virtual IOperand const * operator-( IOperand const & rhs ) const; // Difference
-                virtual IOperand const * operator*( IOperand const & rhs ) const; // Product
-                virtual IOperand const * operator/( IOperand const & rhs ) const; // Quotient
-                virtual IOperand const * operator%( IOperand const & rhs ) const; // Modulo
-                virtual std::string const & toString( void ) const; // String representation of the instance
-                virtual ~IOperand( void ) {}
-        };
+class IOperand {
 
-        class IOperand_Int8 : public IOperand {
-            private:
-                int8_t op_val;
-            public:
-                IOperand_Int8( std::string const & value);
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
-                IOperand const * operator+( IOperand const & rhs ) const;
-                IOperand const * operator-( IOperand const & rhs ) const;
-                IOperand const * operator*( IOperand const & rhs ) const;
-                IOperand const * operator/( IOperand const & rhs ) const;
-                IOperand const * operator%( IOperand const & rhs ) const;
-                std::string const & toString( void ) const;
-        };
+public:
 
-        class IOperand_Int16 : public IOperand {
-            private:
-                int16_t op_val;
-            public:
-                IOperand_Int16( std::string const & value);
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
-                IOperand const * operator+( IOperand const & rhs ) const;
-                IOperand const * operator-( IOperand const & rhs ) const;
-                IOperand const * operator*( IOperand const & rhs ) const;
-                IOperand const * operator/( IOperand const & rhs ) const;
-                IOperand const * operator%( IOperand const & rhs );
-                std::string const & toString( void ) const;
-        };
+	virtual int getPrecision( void ) const = 0; // Precision of the type of the instance
+	virtual eOperandType getType( void ) const = 0; // Type of the instance
 
-        class IOperand_Int32 : public IOperand {
-            private:
-                int32_t op_val;
-            public:
-                IOperand_Int32( std::string const & value) {
-                    op_val = std::stoi(value);
-                };
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
-                IOperand const * operator+( IOperand const & rhs ) const;
-                IOperand const * operator-( IOperand const & rhs ) const;
-                IOperand const * operator*( IOperand const & rhs ) const;
-                IOperand const * operator/( IOperand const & rhs ) const;
-                IOperand const * operator%( IOperand const & rhs ) const;
-                std::string const & toString( void ) const;
-        };
+	virtual IOperand const * operator+( IOperand const & rhs ) const = 0; // Sum
+	virtual IOperand const * operator-( IOperand const & rhs ) const = 0; // Difference
+	virtual IOperand const * operator*( IOperand const & rhs ) const = 0; // Product
+	virtual IOperand const * operator/( IOperand const & rhs ) const = 0; // Quotient
+	virtual IOperand const * operator%( IOperand const & rhs ) const = 0; // Modulo
 
-        class IOperand_Float : public IOperand {
-            private:
-                float op_val;
-            public:
-                IOperand_Float( std::string const & value) {
-                    op_val = std::stof(value);
-                };
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
-                IOperand const * operator+( IOperand const & rhs ) const;
-                IOperand const * operator-( IOperand const & rhs ) const;
-                IOperand const * operator*( IOperand const & rhs ) const;
-                IOperand const * operator/( IOperand const & rhs ) const;
-                IOperand const * operator%( IOperand const & rhs ) const;
-                std::string const & toString( void ) const;
-        };
+	virtual std::string const & toString( void ) const = 0; // String representation of the instance
 
-        class IOperand_Double : public IOperand {
-            private:
-                double op_val;
-            public:
-                IOperand_Double( std::string const & value);
-                int getPrecision( void ) const;
-                eOperandType getType( void ) const;
-                IOperand const * operator+( IOperand const & rhs ) const;
-                IOperand const * operator-( IOperand const & rhs ) const;
-                IOperand const * operator*( IOperand const & rhs ) const;
-                IOperand const * operator/( IOperand const & rhs ) const;
-                IOperand const * operator%( IOperand const & rhs ) const;
-                std::string const & toString( void ) const;
-        };
+	virtual ~IOperand( void ) {}
+};
+
 #endif
